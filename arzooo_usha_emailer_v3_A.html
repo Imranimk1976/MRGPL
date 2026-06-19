@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Arzooo</title>
+
+  <style>
+    /* ─────────────────────────────────────────
+       CSS CUSTOM PROPERTIES (Design Tokens)
+    ───────────────────────────────────────── */
+    :root {
+      --cyan:       #2ec4e8;
+      --cyan-dark:  #18a8d0;
+      --black:      #1a1a1a;
+      --grey-bg:    #f4f4f4;
+      --grey-text:  #555555;
+      --white:      #ffffff;
+      --border:     #d9f0fb;
+      --max-width:  640px;
+      --radius:     8px;
+      --font:       'Arial', Helvetica, sans-serif;
+    }
+
+    /* ─────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background-color: #e8e8e8;
+      font-family: var(--font);
+      color: var(--black);
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    img {
+      border: 0;
+      outline: none;
+      text-decoration: none;
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 1.1rem;
+    }
+
+    /* ─────────────────────────────────────────
+       EMAIL WRAPPER
+    ───────────────────────────────────────── */
+    .email-outer {
+      width: 100%;
+      background-color: #e8e8e8;
+      padding: 24px 12px;
+    }
+
+    .email-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    /* ─────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────── */
+    .site-header {
+      background: var(--white);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-header .logo img {
+      height: 42px;
+      width: auto;
+    }
+
+    .site-header .social-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .site-header .social-bar a img {
+      width: 30px;
+      height: 30px;
+      transition: opacity 0.2s ease;
+    }
+
+    .site-header .social-bar a:hover img {
+      opacity: 0.75;
+    }
+
+    /* ─────────────────────────────────────────
+       FULL-WIDTH BANNERS
+    ───────────────────────────────────────── */
+    .banner-section img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────
+       PRODUCT ROWS
+    ───────────────────────────────────────── */
+    .product-row {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      border-top: 3px solid var(--cyan);
+    }
+
+    /* Reverse layout: text left, image right */
+    .product-row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .product-row .prod-media {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+
+    .product-row .prod-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-row .prod-content {
+      flex: 1;
+      padding: 22px 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .product-row.reverse .prod-content {
+      padding: 22px 22px 22px 20px;
+    }
+
+    .prod-content h2 {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+
+    .prod-content .tagline {
+      font-size: 11.5px;
+      color: var(--grey-text);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .prod-content ul {
+      margin-bottom: 16px;
+    }
+
+    .prod-content ul li {
+      font-size: 11px;
+      color: #333;
+      margin-bottom: 5px;
+      line-height: 1.45;
+    }
+
+    /* ─────────────────────────────────────────
+       ORDER NOW BUTTON
+    ───────────────────────────────────────── */
+    .btn-order {
+      display: inline-block;
+      border: 1.5px solid var(--cyan);
+      border-radius: 5px;
+      padding: 7px 22px;
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+      align-self: flex-start;
+    }
+
+    .btn-order:hover {
+      background: var(--cyan);
+      color: var(--white);
+    }
+
+    /* ─────────────────────────────────────────
+       FULL-WIDTH DARK PRODUCT BANNER
+    ───────────────────────────────────────── */
+    .dark-banner {
+      border-top: 3px solid var(--cyan);
+      position: relative;
+    }
+
+    .dark-banner img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .site-footer {
+      background: var(--black);
+      padding: 28px 24px 24px;
+      text-align: center;
+    }
+
+    .site-footer .footer-logo {
+      margin-bottom: 16px;
+    }
+
+    .site-footer .footer-logo img {
+      height: 32px;
+      width: auto;
+      opacity: 0.85;
+      margin: 0 auto;
+    }
+
+    .site-footer .footer-socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .site-footer .footer-socials a img {
+      width: 32px;
+      height: 32px;
+      transition: opacity 0.2s;
+    }
+
+    .site-footer .footer-socials a:hover img {
+      opacity: 0.7;
+    }
+
+    .site-footer .footer-legal {
+      font-size: 10px;
+      color: #888;
+      line-height: 1.7;
+    }
+
+    .site-footer .footer-legal a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .site-footer .footer-legal a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─────────────────────────────────────────
+       APP BADGE STRIP
+    ───────────────────────────────────────── */
+    .app-strip {
+      background: #f8fdff;
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      text-align: center;
+    }
+
+    .app-strip p {
+      font-size: 12px;
+      color: var(--grey-text);
+      margin-bottom: 10px;
+    }
+
+    .app-strip .badge-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .app-strip .badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 7px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      gap: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .app-strip .badge:hover {
+      background: #333;
+    }
+
+    .app-strip .badge span {
+      font-size: 9px;
+      font-weight: 400;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE — TABLET (≤ 540px)
+    ───────────────────────────────────────── */
+    @media screen and (max-width: 540px) {
+
+      .email-outer {
+        padding: 0;
+      }
+
+      .email-container {
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .site-header {
+        padding: 12px 16px;
+      }
+
+      .site-header .logo img {
+        height: 32px;
+      }
+
+      .site-header .social-bar a img {
+        width: 24px;
+        height: 24px;
+      }
+
+      /* Stack product rows vertically on mobile */
+      .product-row,
+      .product-row.reverse {
+        flex-direction: column;
+      }
+
+      .product-row .prod-media,
+      .product-row.reverse .prod-media {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      .product-row .prod-media img {
+        height: 220px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .product-row .prod-content,
+      .product-row.reverse .prod-content {
+        padding: 18px 16px 20px;
+      }
+
+      .prod-content h2 {
+        font-size: 14px;
+      }
+
+      .prod-content .tagline {
+        font-size: 11px;
+      }
+
+      .prod-content ul li {
+        font-size: 11px;
+      }
+
+      .site-footer {
+        padding: 22px 16px 20px;
+      }
+
+      .site-footer .footer-socials a img {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE — MOBILE (≤ 380px)
+    ───────────────────────────────────────── */
+    @media screen and (max-width: 380px) {
+
+      .site-header .logo img {
+        height: 28px;
+      }
+
+      .site-header .social-bar {
+        gap: 5px;
+      }
+
+      .site-header .social-bar a img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .product-row .prod-media img {
+        height: 190px;
+      }
+
+      .prod-content h2 {
+        font-size: 13px;
+      }
+
+      .btn-order {
+        font-size: 11px;
+        padding: 6px 18px;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       REDUCED MOTION
+    ───────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="email-outer">
+    <div class="email-container">
+
+      <!-- ── HEADER ── -->
+      <header class="site-header" role="banner">
+        <div class="logo">
+          <a href="https://www.arzooo.com/" target="_blank" aria-label="Arzooo Home">
+            <img src="images/01.png" alt="arzooo" width="160" height="42" />
+          </a>
+        </div>
+        <nav class="social-bar" aria-label="Social Media">
+          <a href="https://www.instagram.com/arzoooin/" target="_blank" aria-label="Instagram">
+            <img src="images/02.png" alt="Instagram" width="30" height="30" />
+          </a>
+          <a href="https://www.youtube.com/watch?v=c1E8QhJmqOA" target="_blank" aria-label="YouTube">
+            <img src="images/03.png" alt="YouTube" width="30" height="30" />
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <img src="images/06.png" alt="LinkedIn" width="30" height="30" />
+          </a>
+        </nav>
+      </header>
+
+      <!-- ── HERO BANNER ── -->
+      <section class="banner-section" aria-label="Brand Campaign">
+        <img
+          src="images/19.png"
+          alt="Customers Ka Bharosa Mujh Par, Aur Mera Bharosa Arzooo Par."
+          width="100%"
+        />
+      </section>
+
+      <!-- ── MEGA DEALS BANNER ── -->
+      <section class="banner-section" aria-label="Mega Deals">
+        <img
+          src="images/09.jpg"
+          alt="Power Up Your Week with Mega Deals – Buy Now"
+          width="100%"
+        />
+      </section>
+
+      <!-- ── PRODUCT 1: Bloom Daffodil – Image Left, Text Right ── -->
+      <article class="product-row" aria-label="Bloom Daffodil Ceiling Fan">
+        <div class="prod-media">
+          <img
+            src="images/11.jpg"
+            alt="USHA Bloom Daffodil Ceiling Fan"
+            width="307"
+          />
+        </div>
+        <div class="prod-content">
+          <img src="images/usha.png" width="25%" style="padding-bottom:5px"><h2>Bloom Daffodil</h2>
+          <p class="tagline" style="font-weight:700; color:#1a1a1a; text-transform:uppercase; font-size:11px; letter-spacing:0.5px; margin-bottom:8px;">The Perfect Blend of Beauty and Breeze</p>
+          <ul>
+            <li>Beautifully crafted dual-color designs for the modern home.</li>
+            <li>Dust resistant, water &amp; oil resistant and stain resistant.</li>
+            <li>Performs well even at low voltage.</li>
+            <li>Unique blade design for high air delivery and thrust.</li>
+          </ul>
+          <a href="#" class="btn-order">Order Now</a>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT 2: MAXX AIR ULTRA – Text Left, Image Right ── -->
+      <article class="product-row reverse" aria-label="MAXX AIR ULTRA Pedestal Fan">
+        <div class="prod-media">
+          <img
+            src="images/12.jpg"
+            alt="USHA MAXX AIR ULTRA Pedestal Fan"
+            width="307"
+          />
+        </div>
+        <div class="prod-content">
+			<img src="images/usha.png" width="25%" style="padding-bottom:5px"><h2>MAXX AIR ULTRA</h2>
+          <p class="tagline">Aerodynamically balanced blades for better performance. Auto resettable thermal overload protector for durability. Jerk-free movement with uniform oscillation.</p>
+          <ul>
+            <li>100% Copper motor for longer performance.</li>
+            <li>Anti-Rust protection with plastic blades.</li>
+            <li>Aerodynamic blade design for high air delivery.</li>
+          </ul>
+          <a href="#" class="btn-order">Order Now</a>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT 3: EI 1602 Dry Iron – Image Left, Text Right ── -->
+      <article class="product-row" aria-label="USHA EI 1602 Dry Iron">
+        <div class="prod-media">
+          <img
+            src="images/13.jpg"
+            alt="USHA EI 1602 Dry Iron"
+            width="307"
+          />
+        </div>
+        <div class="prod-content">
+			<img src="images/usha.png" width="25%" style="padding-bottom:5px"><h2>EI 1602 – DRY IRON</h2>
+          <p class="tagline" style="font-weight:700; color:#1a1a1a; text-transform:uppercase; font-size:11px; letter-spacing:0.5px; margin-bottom:8px;">Safe and secure</p>
+          <ul>
+            <li>Lightweight, Non-Stick Soleplate, Overheat Protection.</li>
+            <li>Power Indicator Light &amp; Temperature Control.</li>
+            <li>Wattage: 1000 W &nbsp;|&nbsp; Voltage: 240 V &nbsp;|&nbsp; Frequency: 50 Hz</li>
+          </ul>
+          <a href="#" class="btn-order">Order Now</a>
+        </div>
+      </article>
+
+      <!-- ── PRODUCT 4: ARMOR Compact Iron – Text Left, Image Right ── -->
+      <article class="product-row reverse" aria-label="USHA ARMOR Compact Dry Iron">
+        <div class="prod-media">
+          <img
+            src="images/14.jpg"
+            alt="USHA ARMOR Compact Dry Iron"
+            width="307"
+          />
+        </div>
+        <div class="prod-content">
+			<img src="images/usha.png" width="25%" style="padding-bottom:5px"><h2>ARMOR</h2>
+		  <p class="tagline" style="font-weight:700; color:#1a1a1a; text-transform:uppercase; font-size:11px; letter-spacing:0.5px; margin-bottom:8px;">Compact Dry Iron</p>
+          <ul>
+            <li>Power 1100 W for faster heating.</li>
+            <li>5 fabric settings for all fabric types.</li>
+            <li>Indicator lamp for operational readiness.</li>
+            <li>Black Weilberger non-stick soleplate.</li>
+            <li>180° swivel cord for easy movement.</li>
+            <li>Convenient shockproof plastic body.</li>
+          </ul>
+          <a href="#" class="btn-order">Order Now</a>
+        </div>
+      </article>
+
+      <!-- ── FULL WIDTH: Crisp Air Premia-BV ── -->
+      <section class="dark-banner" aria-label="USHA Crisp Air Premia-BV Exhaust Fan">
+        <img
+          src="images/15.jpg"
+          alt="USHA Crisp Air Premia-BV – Smart Freshness for Enclosed Spaces"
+          width="640"
+        />
+      </section>
+
+      <!-- ── PRODUCT 5: Mist Air Flo Wall Fan – Text Left, Image Right ── -->
+      <article class="product-row reverse" aria-label="USHA Mist Air Flo Wall Fan">
+        <div class="prod-media">
+          <img src="images/16.jpg"
+            alt="USHA Mist Air Flo Wall Fan"
+            width="340"
+          />
+        </div>
+        <div class="prod-content">
+			<img src="images/usha.png" width="25%" style="padding-bottom:5px"><h2>Mist Air Flo</h2>
+          <p class="tagline" style="font-weight:700; color:#1a1a1a; text-transform:uppercase; font-size:11px; letter-spacing:0.5px; margin-bottom:8px;">Wall Fan</p>
+          <p style="font-size:11px; color:#555; margin-bottom:12px; line-height:1.5;">Experience the perfect balance of performance and design. MADE IN INDIA — aerodynamic polypropylene blades and rust-free body for long-lasting, comfortable cooling.</p>
+          <ul>
+            <li>100% Copper motor for longer performance.</li>
+            <li>High air delivery with large-sweep plastic blades.</li>
+            <li>Aerodynamic blade design for high air delivery.</li>
+          </ul>
+          <a href="#" class="btn-order">Order Now</a>
+        </div>
+      </article>
+
+      <!-- ── FOOTER ── -->
+      <footer class="site-footer" role="contentinfo">
+        <div class="footer-logo">
+          <img src="images/01.png" alt="arzooo" width="120" height="32" />
+        </div>
+        <nav class="footer-socials" aria-label="Follow Us">
+          <a href="https://www.instagram.com/arzoooin/" target="_blank" aria-label="Instagram"><img src="images/02.png" alt="Instagram" width="32" height="32" /></a>
+          <a href="https://www.youtube.com/watch?v=c1E8QhJmqOA" target="_blank" aria-label="YouTube"><img src="images/03.png" alt="YouTube" width="32" height="32" /></a>
+          <a href="#" aria-label="LinkedIn"><img src="images/06.png" alt="LinkedIn" width="32" height="32" /></a>
+        </nav>
+        <p class="footer-legal">
+          &copy; 2026 Arzooo. All rights reserved.<br />
+          You received this because you opted in to Arzooo deals &amp; updates.<br />
+          <a href="#">Unsubscribe</a> &nbsp;&middot;&nbsp; <a href="https://www.arzooo.com/terms-and-conditions" target="_blank">Terms and Conditions</a>
+        </p>
+      </footer>
+
+    </div><!-- /.email-container -->
+  </div><!-- /.email-outer -->
+</body>
+</html>
